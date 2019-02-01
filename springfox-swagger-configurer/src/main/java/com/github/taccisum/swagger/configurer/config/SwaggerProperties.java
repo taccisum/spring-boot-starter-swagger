@@ -33,7 +33,7 @@ public class SwaggerProperties {
     /**
      * global operation parameters
      */
-    private Map<String, ParameterProperties> globalOperationParameters = new HashMap<>();
+    private Map<String, ParameterProperties> globalParameters = new HashMap<>();
 
     @Getter
     @Setter
@@ -47,10 +47,20 @@ public class SwaggerProperties {
          */
         private String version;
         /**
-         *
+         * contract name
          */
         private String contractName;
+        /**
+         * terms of service url
+         */
+        private String termsOfServiceUrl;
+        /**
+         * license
+         */
         private String license;
+        /**
+         * license url
+         */
         private String licenseUrl;
         /**
          * description for this document
