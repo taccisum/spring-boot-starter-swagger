@@ -8,11 +8,22 @@
     <artifactId>spring-boot-starter-swagger</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+
     <modules>
         <module>springfox-swagger-configurer</module>
         <module>swagger-spring-boot1-starter</module>
         <module>swagger-spring-boot2-starter</module>
     </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.github.taccisum</groupId>
+                <artifactId>springfox-swagger-configurer</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <plugins>

@@ -11,6 +11,18 @@
 
     <artifactId>swagger-spring-boot2-starter</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.github.taccisum</groupId>
+            <artifactId>springfox-swagger-configurer</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+    </dependencies>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
