@@ -3,7 +3,9 @@ package com.github.taccisum.swagger.configurer.config;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,13 +21,21 @@ public class SwaggerProperties {
     public static final String PREFIX = "swagger";
 
     /**
-     * indicates if enabled swagger2
+     * indicates if enable swagger auto configuration
      */
     private Boolean enabled = true;
     /**
      * base package where to scan API controllers
      */
     private String basePackage = null;
+    /**
+     * include api paths
+     */
+    private List<String> includePaths = new ArrayList<>();
+    /**
+     * exclude api paths
+     */
+    private List<String> excludePaths = new ArrayList<>();
     /**
      * API document info
      */
@@ -47,9 +57,9 @@ public class SwaggerProperties {
          */
         private String version;
         /**
-         * contract name
+         * contact info
          */
-        private String contractName;
+        private Contact contact = new Contact();
         /**
          * terms of service url
          */
@@ -86,6 +96,23 @@ public class SwaggerProperties {
              * indicates if show hostname of the device you app running
              */
             private Boolean showHostname;
+        }
+
+        @Getter
+        @Setter
+        public static class Contact {
+            /**
+             * contact name
+             */
+            private String name;
+            /**
+             * contact url
+             */
+            private String url;
+            /**
+             * contact email
+             */
+            private String email;
         }
     }
 
