@@ -7,7 +7,7 @@ import java.net.UnknownHostException;
  * @author tac - liaojf@cheegu.com
  * @since 2019/2/12
  */
-public class NetUtils {
+public abstract class NetUtils {
     private static String getHostNameForLinux() {
         try {
             return (InetAddress.getLocalHost()).getHostName();

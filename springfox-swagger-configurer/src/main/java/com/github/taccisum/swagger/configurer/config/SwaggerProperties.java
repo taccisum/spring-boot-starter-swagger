@@ -47,7 +47,11 @@ public class SwaggerProperties {
     /**
      * when true it enables rfc6570 url templates
      */
-    private Boolean enableUrlTemplating;
+    private Boolean enableUrlTemplating = false;
+    /**
+     * how to access apis of you app
+     */
+    private AuthProperties auth = new AuthProperties();
     /**
      * API document info
      */
@@ -137,5 +141,20 @@ public class SwaggerProperties {
         private String defaultValue;
         private String description = "global operation parameter";
         private Boolean hidden = false;
+    }
+
+    @Getter
+    @Setter
+    public static class AuthProperties {
+        private Map<String, ApiKeySecurityProperties> apiKey = new HashMap<>();
+
+        @Getter
+        @Setter
+        public static class ApiKeySecurityProperties {
+            private String keyName;
+            private String passAs;
+            private List<String> includePaths = new ArrayList<>();
+            private List<String> excludePaths = new ArrayList<>();
+        }
     }
 }

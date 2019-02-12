@@ -4,27 +4,21 @@ import com.github.taccisum.swagger.configurer.concrete.DefaultDescriptionBuilder
 import com.github.taccisum.swagger.configurer.config.SwaggerProperties;
 import com.github.taccisum.swagger.configurer.event.AfterInitializeDocketEvent;
 import com.github.taccisum.swagger.configurer.event.BeforeInitializeDocketEvent;
-import com.google.common.base.Predicates;
+import com.github.taccisum.swagger.configurer.util.PathsUtil;
 import com.google.common.collect.Lists;
 import com.google.common.eventbus.EventBus;
 import org.springframework.core.Ordered;
 import org.springframework.util.CollectionUtils;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.ParameterBuilder;
-import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.schema.ModelRef;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.Contact;
-import springfox.documentation.service.Parameter;
+import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.*;
 
 /**
  * @author tac - liaojf@cheegu.com
@@ -72,20 +66,31 @@ public class DocketBuilder {
             properties.setIncludePaths(Lists.newArrayList("/**"));
         }
 
+        Map<String, SecurityScheme> schemeMap = new HashMap<>();
+        Map<String, SecurityContext> contextMap = new HashMap<>();
+
+        properties.getAuth().getApiKey().forEach((k, v) -> {
+            schemeMap.put(k, new ApiKey(k, v.getKeyName(), v.getPassAs()));
+            contextMap.put(k, SecurityContext.builder()
+                    .securityReferences(Lists.newArrayList(
+                            SecurityReference.builder().scopes(new AuthorizationScope[]{}).reference(k).build()
+                    ))
+                    .forPaths(PathsUtil.includeAndExclude(v.getIncludePaths(), v.getExcludePaths()))
+                    .build()
+            );
+        });
+
         instance.apiInfo(apiInfo())
                 .pathMapping(properties.getPathMapping())
                 .genericModelSubstitutes(properties.getGenericModelSubstitutes().toArray(new Class[]{}))
                 .enableUrlTemplating(properties.getEnableUrlTemplating())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage(properties.getBasePackage()))
-                .paths(
-                        Predicates.and(
-                                Predicates.or(properties.getIncludePaths().stream().map(PathSelectors::ant).collect(Collectors.toList())),
-                                Predicates.not(Predicates.or(properties.getExcludePaths().stream().map(PathSelectors::ant).collect(Collectors.toList())))
-                        )
-                )
+                .paths(PathsUtil.includeAndExclude(properties.getIncludePaths(), properties.getExcludePaths()))
                 .build()
                 .globalOperationParameters(gop())
+                .securitySchemes(new ArrayList<>(schemeMap.values()))
+                .securityContexts(new ArrayList<>(contextMap.values()))
         ;
 
         eventBus.post(new AfterInitializeDocketEvent());
