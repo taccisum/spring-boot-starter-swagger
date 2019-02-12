@@ -1,5 +1,6 @@
 package com.github.taccisum.swagger.configurer.config;
 
+import com.github.taccisum.swagger.configurer.constant.PassAs;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -152,7 +153,7 @@ public class SwaggerProperties {
         @Setter
         public static class ApiKeySecurityProperties {
             private String keyName;
-            private String passAs;
+            private PassAs passAs;
             private List<String> includePaths = new ArrayList<>();
             private List<String> excludePaths = new ArrayList<>();
         }

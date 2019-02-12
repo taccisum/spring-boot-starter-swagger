@@ -70,7 +70,7 @@ public class DocketBuilder {
         Map<String, SecurityContext> contextMap = new HashMap<>();
 
         properties.getAuth().getApiKey().forEach((k, v) -> {
-            schemeMap.put(k, new ApiKey(k, v.getKeyName(), v.getPassAs()));
+            schemeMap.put(k, new ApiKey(k, v.getKeyName(), v.getPassAs().val()));
             contextMap.put(k, SecurityContext.builder()
                     .securityReferences(Lists.newArrayList(
                             SecurityReference.builder().scopes(new AuthorizationScope[]{}).reference(k).build()
