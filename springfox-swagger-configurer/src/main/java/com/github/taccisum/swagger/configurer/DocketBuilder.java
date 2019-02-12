@@ -51,11 +51,10 @@ public class DocketBuilder {
         }
 
         instance = new Docket(DocumentationType.SWAGGER_2);
-        interceptors.stream()
-                .sorted(Comparator.comparingInt(Ordered::getOrder))
-                .forEach(i -> eventBus.register(i));
 
-        eventBus.post(new BeforeInitializeDocketEvent());
+        registerInterceptors();
+
+        eventBus.post(new BeforeInitializeDocketEvent(instance));
 
         if (!properties.getEnabled()) {
             instance.enable(false);
@@ -93,9 +92,15 @@ public class DocketBuilder {
                 .securityContexts(new ArrayList<>(contextMap.values()))
         ;
 
-        eventBus.post(new AfterInitializeDocketEvent());
+        eventBus.post(new AfterInitializeDocketEvent(instance));
 
         return instance;
+    }
+
+    private void registerInterceptors() {
+        interceptors.stream()
+                .sorted(Comparator.comparingInt(Ordered::getOrder))
+                .forEach(i -> eventBus.register(i));
     }
 
     private List<Parameter> gop() {
