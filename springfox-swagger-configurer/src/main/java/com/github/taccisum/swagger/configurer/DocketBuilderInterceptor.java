@@ -11,8 +11,10 @@ import org.springframework.core.Ordered;
  */
 public interface DocketBuilderInterceptor extends Ordered {
     @Subscribe
-    void before(BeforeInitializeDocketEvent event);
+    default void before(BeforeInitializeDocketEvent event) {
+    }
 
     @Subscribe
-    void after(AfterInitializeDocketEvent event);
+    default void after(AfterInitializeDocketEvent event) {
+    }
 }
