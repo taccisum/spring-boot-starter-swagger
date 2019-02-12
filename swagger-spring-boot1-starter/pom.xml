@@ -11,5 +11,6 @@
 
     <artifactId>swagger-spring-boot1-starter</artifactId>
 
+    <name>Swagger Spring Boot1 Starter</name>
 
 </project>

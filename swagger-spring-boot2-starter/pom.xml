@@ -11,6 +11,8 @@
 
     <artifactId>swagger-spring-boot2-starter</artifactId>
 
+    <name>Swagger Spring Boot2 Starter</name>
+
     <dependencies>
         <dependency>
             <groupId>com.github.taccisum</groupId>

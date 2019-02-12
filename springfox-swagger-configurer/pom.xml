@@ -11,6 +11,8 @@
 
     <artifactId>springfox-swagger-configurer</artifactId>
 
+    <name>SpringFox Swagger Configurer</name>
+
     <properties>
         <springfox-swagger.version>2.9.2</springfox-swagger.version>
     </properties>
