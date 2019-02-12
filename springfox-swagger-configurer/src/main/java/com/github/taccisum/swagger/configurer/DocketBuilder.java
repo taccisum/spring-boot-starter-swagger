@@ -2,8 +2,12 @@ package com.github.taccisum.swagger.configurer;
 
 import com.github.taccisum.swagger.configurer.concrete.DefaultDescriptionBuilder;
 import com.github.taccisum.swagger.configurer.config.SwaggerProperties;
+import com.github.taccisum.swagger.configurer.event.AfterInitializeDocketEvent;
+import com.github.taccisum.swagger.configurer.event.BeforeInitializeDocketEvent;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
+import com.google.common.eventbus.EventBus;
+import org.springframework.core.Ordered;
 import org.springframework.util.CollectionUtils;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.ParameterBuilder;
@@ -17,6 +21,7 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -26,7 +31,9 @@ import java.util.stream.Collectors;
  * @since 2019/2/1
  */
 public class DocketBuilder {
-    private Docket instance = new Docket(DocumentationType.SWAGGER_2);
+    private EventBus eventBus = new EventBus();
+    private List<DocketBuilderInterceptor> interceptors = new ArrayList<>();
+    private Docket instance = null;
 
     private SwaggerProperties properties;
     private DescriptionBuilder descriptionBuilder;
@@ -40,7 +47,22 @@ public class DocketBuilder {
         this.descriptionBuilder = descriptionBuilder;
     }
 
+    public void addInterceptor(DocketBuilderInterceptor interceptor) {
+        interceptors.add(interceptor);
+    }
+
     public Docket build() {
+        if (instance != null) {
+            return instance;
+        }
+
+        instance = new Docket(DocumentationType.SWAGGER_2);
+        interceptors.stream()
+                .sorted(Comparator.comparingInt(Ordered::getOrder))
+                .forEach(i -> eventBus.register(i));
+
+        eventBus.post(new BeforeInitializeDocketEvent());
+
         if (!properties.getEnabled()) {
             instance.enable(false);
             return instance;
@@ -62,6 +84,8 @@ public class DocketBuilder {
                 .build()
                 .globalOperationParameters(gop())
         ;
+
+        eventBus.post(new AfterInitializeDocketEvent());
 
         return instance;
     }
