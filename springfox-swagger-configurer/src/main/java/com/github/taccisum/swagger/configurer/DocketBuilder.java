@@ -73,6 +73,9 @@ public class DocketBuilder {
         }
 
         instance.apiInfo(apiInfo())
+                .pathMapping(properties.getPathMapping())
+                .genericModelSubstitutes(properties.getGenericModelSubstitutes().toArray(new Class[]{}))
+                .enableUrlTemplating(properties.getEnableUrlTemplating())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage(properties.getBasePackage()))
                 .paths(

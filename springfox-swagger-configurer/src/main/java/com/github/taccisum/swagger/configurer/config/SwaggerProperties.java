@@ -37,6 +37,18 @@ public class SwaggerProperties {
      */
     private List<String> excludePaths = new ArrayList<>();
     /**
+     * path that acts as a prefix to the api base path
+     */
+    private String pathMapping = "/";
+    /**
+     * generic classes on which to apply generic model substitution
+     */
+    private List<Class> genericModelSubstitutes = new ArrayList<>();
+    /**
+     * when true it enables rfc6570 url templates
+     */
+    private Boolean enableUrlTemplating;
+    /**
      * API document info
      */
     private Info info = new Info();
