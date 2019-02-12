@@ -5,7 +5,7 @@ import com.github.taccisum.swagger.configurer.concrete.DefaultDescriptionBuilder
 import com.github.taccisum.swagger.configurer.config.SwaggerProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
 import springfox.documentation.spring.web.plugins.Docket;
@@ -16,12 +16,18 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * @since 2019/2/12
  */
 @EnableSwagger2
-@EnableConfigurationProperties(SwaggerProperties.class)
 public class SwaggerAutoConfiguration {
     @Autowired
     private SwaggerProperties properties;
     @Autowired
     private Environment environment;
+
+    @Bean
+    @ConditionalOnMissingBean
+    @ConfigurationProperties(SwaggerProperties.PREFIX)
+    public SwaggerProperties swaggerProperties() {
+        return new SwaggerProperties();
+    }
 
     @Bean
     @ConditionalOnMissingBean
