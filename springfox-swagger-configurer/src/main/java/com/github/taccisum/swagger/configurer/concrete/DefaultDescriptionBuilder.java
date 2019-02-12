@@ -2,8 +2,8 @@ package com.github.taccisum.swagger.configurer.concrete;
 
 import com.github.taccisum.swagger.configurer.DescriptionBuilder;
 import com.github.taccisum.swagger.configurer.config.SwaggerProperties;
+import com.github.taccisum.swagger.configurer.util.NetUtils;
 import org.springframework.core.env.Environment;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -28,7 +28,11 @@ public class DefaultDescriptionBuilder implements DescriptionBuilder {
         if (descConf.getShowProfiles() && env != null) {
             sb.append("<br/>");
             sb.append("<span style='font-weight:bold'>Active profiles: </span>");
-            sb.append(Arrays.toString(env.getActiveProfiles()));
+            String[] activeProfiles = env.getActiveProfiles();
+            if (activeProfiles.length == 0) {
+                activeProfiles = new String[]{"default"};
+            }
+            sb.append(Arrays.toString(activeProfiles));
         }
         if (descConf.getShowStartDate()) {
             sb.append("<br/>");
@@ -38,9 +42,7 @@ public class DefaultDescriptionBuilder implements DescriptionBuilder {
         if (descConf.getShowHostname()) {
             sb.append("<br/>");
             sb.append("<span style='font-weight:bold'>Hostname: </span>");
-            // TODO::
-            throw new NotImplementedException();
-//            sb.append(env.getProperty("hostname"));
+            sb.append(NetUtils.getHostName());
         }
 
         return sb.toString();
