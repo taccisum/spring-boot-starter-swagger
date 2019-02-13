@@ -3,6 +3,7 @@ package com.github.taccisum.swagger.configurer.config;
 import com.github.taccisum.swagger.configurer.constant.PassAs;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import springfox.documentation.swagger.web.*;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import java.util.Map;
  */
 @Getter
 @Setter
+@ConfigurationProperties(SwaggerProperties.PREFIX)
 public class SwaggerProperties {
     /**
      * spring boot properties prefix constant
@@ -103,7 +105,7 @@ public class SwaggerProperties {
         @Setter
         public static class Description {
             /**
-             * custom description html. will override all other configs if not null
+             * custom description html. if not null, will override all other configs
              */
             private String html;
             /**
