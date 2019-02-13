@@ -222,7 +222,7 @@ public class SwaggerProperties {
          */
         private String[] supportedSubmitMethods = UiConfiguration.Constants.DEFAULT_SUBMIT_METHODS;
         /**
-         * specs validator url. swagger.io's online validator by default
+         * specs validator url. use swagger.io's online validator by default. if null, disable validation
          */
         private String validatorUrl;
     }

@@ -1,6 +1,7 @@
 package com.github.taccisum.swagger.configurer;
 
 import com.github.taccisum.swagger.configurer.config.SwaggerProperties;
+import org.springframework.util.StringUtils;
 import springfox.documentation.swagger.web.UiConfiguration;
 import springfox.documentation.swagger.web.UiConfigurationBuilder;
 
@@ -17,7 +18,8 @@ public class UIConfigurationBuilderAdapter {
 
     public UiConfiguration build() {
         SwaggerProperties.UIProperties uiProperties = properties.getUi();
-        return UiConfigurationBuilder.builder()
+        UiConfigurationBuilder builder = UiConfigurationBuilder.builder();
+        builder
                 .deepLinking(uiProperties.getDeepLinking())
                 .displayOperationId(uiProperties.getDisplayOperationId())
                 .defaultModelsExpandDepth(uiProperties.getDefaultModelsExpandDepth())
@@ -30,8 +32,10 @@ public class UIConfigurationBuilderAdapter {
                 .operationsSorter(uiProperties.getOperationsSorter())
                 .showExtensions(uiProperties.getShowExtensions())
                 .tagsSorter(uiProperties.getTagsSorter())
-                .supportedSubmitMethods(uiProperties.getSupportedSubmitMethods())
-                .validatorUrl(uiProperties.getValidatorUrl())
-                .build();
+                .supportedSubmitMethods(uiProperties.getSupportedSubmitMethods());
+        if (!StringUtils.isEmpty(uiProperties.getValidatorUrl())) {
+            builder.validatorUrl(uiProperties.getValidatorUrl());
+        }
+        return builder.build();
     }
 }
