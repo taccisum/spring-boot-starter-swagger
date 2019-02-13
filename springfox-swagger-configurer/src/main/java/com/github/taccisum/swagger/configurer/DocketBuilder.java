@@ -107,19 +107,20 @@ public class DocketBuilder {
         Map<String, SwaggerProperties.ParameterProperties> globalParameters = properties.getGlobalParameters();
         if (globalParameters != null && globalParameters.size() > 0) {
             List<Parameter> parameters = new ArrayList<>();
-            for (String name : globalParameters.keySet()) {
-                SwaggerProperties.ParameterProperties parameterProperties = globalParameters.get(name);
+
+            globalParameters.forEach((k, v) -> {
                 Parameter parameter = new ParameterBuilder()
-                        .name(name)
-                        .modelRef(new ModelRef(parameterProperties.getModelRef()))
-                        .parameterType(parameterProperties.getParameterType())
-                        .required(parameterProperties.getRequired())
-                        .defaultValue(parameterProperties.getDefaultValue())
-                        .description(parameterProperties.getDescription())
-                        .hidden(parameterProperties.getHidden())
+                        .name(k)
+                        .modelRef(new ModelRef(v.getModelRef()))
+                        .parameterType(v.getParameterType())
+                        .required(v.getRequired())
+                        .defaultValue(v.getDefaultValue())
+                        .description(v.getDescription())
+                        .hidden(v.getHidden())
                         .build();
                 parameters.add(parameter);
-            }
+            });
+
             return parameters;
         }
         return null;
