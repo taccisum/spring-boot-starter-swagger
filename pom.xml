@@ -17,6 +17,28 @@
         <module>swagger-spring-boot2-starter</module>
     </modules>
 
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://mit-license.org/</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>taccisum</name>
+            <email>514162920@qq.com</email>
+            <url>https://taccisum.github.io</url>
+        </developer>
+    </developers>
+
+    <scm>
+        <url>https://github.com/taccisum/spring-boot-starter-swagger</url>
+        <connection>https://github.com/taccisum/spring-boot-starter-swagger.git</connection>
+        <developerConnection>https://github.com/taccisum</developerConnection>
+    </scm>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
