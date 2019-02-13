@@ -1,5 +1,8 @@
 # Spring Boot Starter Swagger
 
+[![Build Status](https://www.travis-ci.org/taccisum/spring-boot-starter-swagger.svg?branch=master)](https://www.travis-ci.org/taccisum/spring-boot-starter-swagger)
+
+
 此项目是对应[springfox swagger2](https://github.com/springfox/springfox/tree/master/springfox-swagger2)的spring boot starter。其
 
 - 完美适配springfox-swagger2，几乎支持通过yaml文件进行所有配置
