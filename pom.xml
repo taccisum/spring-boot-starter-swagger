@@ -10,6 +10,8 @@
     <version>1.0</version>
 
     <name>Spring Boot Starter Swagger</name>
+    <url>https://github.com/taccisum/spring-boot-starter-swagger</url>
+    <description>spring boot starter for springfox-swagger2</description>
 
     <modules>
         <module>springfox-swagger-configurer</module>
