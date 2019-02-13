@@ -2,6 +2,7 @@ package com.github.taccisum.swagger.autoconfigure;
 
 import com.github.taccisum.swagger.configurer.DocketBuilder;
 import com.github.taccisum.swagger.configurer.DocketBuilderInterceptor;
+import com.github.taccisum.swagger.configurer.UIConfigurationBuilderAdapter;
 import com.github.taccisum.swagger.configurer.concrete.DefaultDescriptionBuilder;
 import com.github.taccisum.swagger.configurer.config.SwaggerProperties;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
 import org.springframework.util.CollectionUtils;
 import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger.web.UiConfiguration;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.List;
@@ -46,5 +48,11 @@ public class SwaggerAutoConfiguration {
         }
 
         return builder.build();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public UiConfiguration uiConfiguration() {
+        return new UIConfigurationBuilderAdapter(properties).build();
     }
 }
