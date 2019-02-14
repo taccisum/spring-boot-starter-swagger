@@ -66,7 +66,7 @@ public class LogDocketBuilderInterceptor implements DocketBuilderInterceptor {
 }
 ```
 
-## 展示更多的API信息
+## 在文档中展示更多的信息
 
 ```yaml
 swagger:
