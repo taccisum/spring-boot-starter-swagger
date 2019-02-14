@@ -9,6 +9,13 @@
 - 提供拦截器，允许用户自行扩展自定义配置
 - 同时支持spring boot1和spring boot2
 
+## Release Note
+
+### v1.0.1
+
+- 修复部分配置为null时会报NPE的bug
+
+
 ## Getting Started
 
 引入依赖
