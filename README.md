@@ -1,7 +1,7 @@
 # Spring Boot Starter Swagger
 
 [![Build Status](https://www.travis-ci.org/taccisum/spring-boot-starter-swagger.svg?branch=master)](https://www.travis-ci.org/taccisum/spring-boot-starter-swagger)
-
+[![Maven Central](https://img.shields.io/maven-central/v/com.github.taccisum/spring-boot-starter-swagger.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.github.taccisum%22%20AND%20a:%22spring-boot-starter-swagger%22)
 
 此项目是对应[springfox swagger2](https://github.com/springfox/springfox/tree/master/springfox-swagger2)的spring boot starter。其
 
