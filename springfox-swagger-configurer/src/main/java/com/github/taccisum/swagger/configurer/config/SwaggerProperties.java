@@ -67,7 +67,7 @@ public class SwaggerProperties {
     /**
      * swagger ui configuration
      */
-    private UIProperties ui;
+    private UIProperties ui = new UIProperties();
 
     @Getter
     @Setter
@@ -111,15 +111,15 @@ public class SwaggerProperties {
             /**
              * indicates if show active spring profiles of you project
              */
-            private Boolean showProfiles;
+            private Boolean showProfiles = true;
             /**
              * indicates if show start date of you project
              */
-            private Boolean showStartDate;
+            private Boolean showStartDate = true;
             /**
              * indicates if show hostname of the device you app running
              */
-            private Boolean showHostname;
+            private Boolean showHostname = true;
         }
 
         @Getter
