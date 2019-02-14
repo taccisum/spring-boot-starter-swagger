@@ -37,23 +37,12 @@
 </dependency>
 ```
 
-通过yaml文件进行配置，各配置详情可以参考[全配置一览](#全配置一览)
+通过yaml文件进行配置，更多配置详情可以参考[全配置一览](#全配置一览)
 
 **application.yml**
 ```yaml
 swagger:
-  enabled: true
   base-package: com.github.taccisum.controller
-  path-mapping: /
-  info:
-    contact:
-      name: taccisum
-      url: https://taccisum.github.io
-      email: 3277800095@qq.com
-    title: Sample docs
-    version: 1.0
-  include-paths:
-    - /**
 ```
 
 ## 通过拦截器监听Docket实例的构建事件
