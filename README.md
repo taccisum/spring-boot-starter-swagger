@@ -9,6 +9,8 @@
 - 提供拦截器，允许用户自行扩展自定义配置
 - 同时支持spring boot1和spring boot2
 
+[**示例项目地址**](https://github.com/taccisum/spring-boot-starter-swagger-sample)
+
 ## Release Note
 
 ### v1.0.1
