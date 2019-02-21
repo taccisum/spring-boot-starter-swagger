@@ -5,12 +5,12 @@
     <parent>
         <artifactId>spring-boot-starter-swagger</artifactId>
         <groupId>com.github.taccisum</groupId>
-        <version>1.0.1-SNAPSHOT</version>
+        <version>1.0.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>swagger-spring-boot1-starter</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>${parent.version}</version>
 
     <name>Swagger Spring Boot1 Starter</name>
 
