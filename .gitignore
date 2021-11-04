@@ -6,3 +6,4 @@
 *.log.zip
 target/
 .DS_Store
+*.versionsBackup
