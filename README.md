@@ -3,19 +3,23 @@
 [![Build Status](https://www.travis-ci.org/taccisum/spring-boot-starter-swagger.svg?branch=master)](https://www.travis-ci.org/taccisum/spring-boot-starter-swagger)
 [![Maven Central](https://img.shields.io/maven-central/v/com.github.taccisum/spring-boot-starter-swagger.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.github.taccisum%22%20AND%20a:%22spring-boot-starter-swagger%22)
 
-此项目是对应[springfox swagger2](https://github.com/springfox/springfox/tree/master/springfox-swagger2)的spring boot starter。其
+此项目是对应 [springfox swagger2](https://github.com/springfox/springfox/tree/master/springfox-swagger2) 的 spring boot starter。其
 
-- 完美适配springfox-swagger2，几乎支持通过yaml文件进行所有配置
+- 完美适配 springfox-swagger2，几乎支持通过 yaml 文件进行所有配置
 - 提供拦截器，允许用户自行扩展自定义配置
-- 同时支持spring boot1和spring boot2
+- 同时支持 Spring Boot1 和 Spring Boot2
 
 [**示例项目地址**](https://github.com/taccisum/spring-boot-starter-swagger-sample)
 
 ## Release Note
 
+### v1.0.2
+
+- 修复某些项目场景下访问 `/swagger-ui.html` 出现 404 的问题，提升开箱体验
+
 ### v1.0.1
 
-- 修复部分配置为null时会报NPE的bug
+- 修复部分配置为 null 时会报 NPE 的 bug
 
 
 ## Getting Started
@@ -39,13 +43,15 @@
 </dependency>
 ```
 
-通过yaml文件进行配置，更多配置详情可以参考[全配置一览](#全配置一览)
+通过 yaml 文件进行配置，更多配置详情可以参考[全配置一览](#全配置一览)
 
 **application.yml**
 ```yaml
 swagger:
   base-package: com.github.taccisum.controller
 ```
+
+启动你的 Spring Boot Web 项目，访问 [/swagger-ui.html](http://localhost:8080/swagger-ui.html)
 
 ## 通过拦截器监听Docket实例的构建事件
 
@@ -151,6 +157,16 @@ swagger:
     supported-submit-methods: # 支持在文档上[try it out]功能的方法列表
       - get
       - post
+    resources:  # Swagger UI 所需的相关资源映射配置
+      static:  # 静态文件
+        path-pattern: /**
+        locations: classpath:/static/
+      index:   # 主页
+        path-pattern: swagger-ui.html
+        locations: classpath:/META-INF/resources/
+      webjars:    # webjars 相关依赖
+        path-pattern: /webjars/**
+        locations: classpath:/META-INF/resources/webjars/
 ```
 
 部分配置（如Map类型）需要通过.properties文件编写才有提示，建议这部分配置可以单独编写。

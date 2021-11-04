@@ -228,10 +228,22 @@ public class SwaggerProperties {
         private String validatorUrl;
         private Resources resources = new Resources();
 
+        /**
+         * relevant resources depended by swagger ui
+         */
         @Data
         public static class Resources {
+            /**
+             * static files
+             */
             private Resource statics = new Resource("/**", "classpath:/static/");
+            /**
+             * home page html
+             */
             private Resource index = new Resource("swagger-ui.html", "classpath:/META-INF/resources/");
+            /**
+             * webjars
+             */
             private Resource webjars = new Resource("/webjars/**", "classpath:/META-INF/resources/webjars/");
 
             @Data
