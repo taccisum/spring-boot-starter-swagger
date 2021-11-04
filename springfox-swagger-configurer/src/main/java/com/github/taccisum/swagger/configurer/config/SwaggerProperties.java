@@ -248,7 +248,13 @@ public class SwaggerProperties {
 
             @Data
             public static class Resource {
+                /**
+                 * specify this swagger resource's path pattern(like '/webjars/**')
+                 */
                 private String pathPattern;
+                /**
+                 * specify this swagger resource's locations(like 'classpath:/META-INF/resources/webjars/')
+                 */
                 private String locations;
 
                 public Resource(String pathPattern, String locations) {
