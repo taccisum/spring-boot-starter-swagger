@@ -2,6 +2,7 @@ package com.github.taccisum.swagger.autoconfigure;
 
 import com.github.taccisum.swagger.configurer.DocketBuilder;
 import com.github.taccisum.swagger.configurer.DocketBuilderInterceptor;
+import com.github.taccisum.swagger.configurer.ResourceMappingAdapter;
 import com.github.taccisum.swagger.configurer.UIConfigurationBuilderAdapter;
 import com.github.taccisum.swagger.configurer.concrete.DefaultDescriptionBuilder;
 import com.github.taccisum.swagger.configurer.config.SwaggerProperties;
@@ -11,6 +12,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger.web.UiConfiguration;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
@@ -22,7 +25,7 @@ import java.util.List;
  * @since 2019/2/12
  */
 @EnableSwagger2
-public class SwaggerAutoConfiguration {
+public class SwaggerAutoConfiguration extends WebMvcConfigurerAdapter {
     @Autowired
     private SwaggerProperties properties;
     @Autowired
@@ -54,5 +57,11 @@ public class SwaggerAutoConfiguration {
     @ConditionalOnMissingBean
     public UiConfiguration uiConfiguration() {
         return new UIConfigurationBuilderAdapter(properties).build();
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        new ResourceMappingAdapter(properties).doMapping(registry);
+        super.addResourceHandlers(registry);
     }
 }

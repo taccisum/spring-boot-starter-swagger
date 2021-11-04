@@ -7,7 +7,7 @@
     <groupId>com.github.taccisum</groupId>
     <artifactId>spring-boot-starter-swagger</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
 
     <name>Spring Boot Starter Swagger</name>
     <url>https://github.com/taccisum/spring-boot-starter-swagger</url>
@@ -60,6 +60,11 @@
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <version>2.7</version>
             </plugin>
         </plugins>
     </build>

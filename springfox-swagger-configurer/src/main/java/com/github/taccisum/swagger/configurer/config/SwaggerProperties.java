@@ -1,6 +1,7 @@
 package com.github.taccisum.swagger.configurer.config;
 
 import com.github.taccisum.swagger.configurer.constant.PassAs;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -225,5 +226,24 @@ public class SwaggerProperties {
          * specs validator url. use swagger.io's online validator by default. if null, disable validation
          */
         private String validatorUrl;
+        private Resources resources = new Resources();
+
+        @Data
+        public static class Resources {
+            private Resource statics = new Resource("/**", "classpath:/static/");
+            private Resource index = new Resource("swagger-ui.html", "classpath:/META-INF/resources/");
+            private Resource webjars = new Resource("/webjars/**", "classpath:/META-INF/resources/webjars/");
+
+            @Data
+            public static class Resource {
+                private String pathPattern;
+                private String locations;
+
+                public Resource(String pathPattern, String locations) {
+                    this.pathPattern = pathPattern;
+                    this.locations = locations;
+                }
+            }
+        }
     }
 }
